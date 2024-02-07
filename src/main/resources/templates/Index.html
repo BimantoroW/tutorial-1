@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ADV Shop</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container">
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; height: 100vh; background-image: url(https://cdn.discordapp.com/attachments/1120757548992172154/1204701560865558528/blob.png?ex=65d5b0c2&is=65c33bc2&hm=dce254e488f27ff77659b831d87dfc59d2e39c631e2cbf50d48b86ac1c4f342a&); background-position: center; background-size: cover;"></div>
+
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; height: 100vh; background-color: rgba(0, 0, 0, 0.5);"></div>
+
+    <div style="position: relative; height: 100vh;">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-md-12 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
+                    <div style="max-width: 350px;">
+                        <h1 class="text-uppercase fw-bold" style="color: white;">Welcome to the<br>ADV Shop</h1>
+                        <p class="my-3" style="color: white;">Have a look at your products</p>
+                        <a th:href="@{/product/list}" class="btn btn-primary btn-lg mb-3">Product List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
