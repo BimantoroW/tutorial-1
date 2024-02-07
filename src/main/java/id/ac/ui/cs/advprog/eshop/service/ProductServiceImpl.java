@@ -22,6 +22,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Product edit(Product product, String newName, int newQuantity) {
+        productRepository.edit(product, newName, newQuantity);
+        return product;
+    }
+
+    @Override
     public List<Product> findAll() {
         Iterator<Product> productIterator = productRepository.findAll();
         List<Product> allProduct = new ArrayList<>();
