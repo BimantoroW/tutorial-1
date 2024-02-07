@@ -20,12 +20,15 @@ public class ProductRepository {
         return product;
     }
 
-    public Product edit(Product product, String newName, int newQuantity) {
+    public boolean edit(Product product, String newName, int newQuantity) {
         int productIndex = productData.indexOf(product);
+        if (productIndex < 0) {
+            return false;
+        }
         Product edited = productData.get(productIndex);
         edited.setProductName(newName);
         edited.setProductQuantity(newQuantity);
-        return edited;
+        return true;
     }
 
     public Product delete(Product product) {
