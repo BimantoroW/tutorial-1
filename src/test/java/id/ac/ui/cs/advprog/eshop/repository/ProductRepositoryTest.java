@@ -77,12 +77,34 @@ public class ProductRepositoryTest {
 
         String newName = "Cicak bin Kadal";
         int newQuantity = 50;
-        productRepository.edit(product, newName, newQuantity);
+        boolean result = productRepository.edit(product, newName, newQuantity);
 
         Iterator<Product> iterator = productRepository.findAll();
         Product edited = iterator.next();
         assertEquals(newName, edited.getProductName());
         assertEquals(newQuantity, edited.getProductQuantity());
+        assertTrue(result);
+    }
+
+    @Test
+    void testInvalidEdit() {
+        Product product = new Product();
+        product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        Product newProduct = new Product();
+        newProduct.setProductId("meow-mewowwow-mewo");
+        String newName = "Cicak bin Kadal";
+        int newQuantity = 50;
+        boolean result = productRepository.edit(newProduct, newName, newQuantity);
+
+        Iterator<Product> iterator = productRepository.findAll();
+        Product edited = iterator.next();
+        assertNotEquals(newName, edited.getProductName());
+        assertNotEquals(newQuantity, edited.getProductQuantity());
+        assertFalse(result);
     }
 
     @Test
@@ -93,10 +115,11 @@ public class ProductRepositoryTest {
         product.setProductQuantity(100);
         productRepository.create(product);
 
-        productRepository.delete(product);
+        boolean result = productRepository.delete(product);
 
         Iterator<Product> iterator = productRepository.findAll();
         assertFalse(iterator.hasNext());
+        assertTrue(result);
     }
 
     @Test
@@ -109,9 +132,10 @@ public class ProductRepositoryTest {
 
         Product dummy = new Product();
         dummy.setProductId("dummy-id");
-        productRepository.delete(dummy);
+        boolean result = productRepository.delete(dummy);
 
         Iterator<Product> iterator = productRepository.findAll();
         assertTrue(iterator.hasNext());
+        assertFalse(result);
     }
 }
