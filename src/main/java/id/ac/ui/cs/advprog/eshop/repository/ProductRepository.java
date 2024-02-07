@@ -20,6 +20,14 @@ public class ProductRepository {
         return product;
     }
 
+    public Product edit(Product product, String newName, int newQuantity) {
+        int productIndex = productData.indexOf(product);
+        Product edited = productData.get(productIndex);
+        edited.setProductName(newName);
+        edited.setProductQuantity(newQuantity);
+        return edited;
+    }
+
     public Iterator<Product> findAll() {
         return productData.iterator();
     }
