@@ -14,7 +14,8 @@ sehingga itu dapat menjadi sebuah _vulnerability_ juga.
 1. Setelah menulis _unit test_ dan _functional test_, saya semakin yakin dengan kebenaran program saya. Dengan adanya
    tes-tes yang otomatis ini, saya dapat memeriksa kebenaran program saya dengan mudah setiap kali saya membuat perubahan.
    Saya tidak perlu khawatir lagi apakah saya ada yang terlewat seperti ketika saya mengetes program saya secara manual.
-   Kemudian, mengenai 100% _code coverage_, menurut saya hal tersebut tidak menandakan program yang bebas dari _bug_ dan
+   Menurut saya, kita sebaiknya menulis setidaknya satu _test_ untuk tiap _method_ yang ada di dalam kelas yang ingin kita
+   _test_. Kemudian, mengenai 100% _code coverage_, menurut saya hal tersebut tidak menandakan program yang bebas dari _bug_ dan
    _error_. _Code coverage_ adalah sebuah _metric_ yang mengukur berapa persen  _source code_ dari program kita yang dieksekusi
    saat menjankan suatu _test suite_. Namun, _test suite_ tersebut tetap harus dibuat oleh kita sehingga masih ada kemungkinan
    _human error_, seperti tidak memikirkan suatu _edge case_ saat menulis tes-tesnya.
