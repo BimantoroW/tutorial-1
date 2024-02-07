@@ -44,4 +44,18 @@ public class ProductTest {
     void testInvalidGetProductQuantity() {
         assertNotEquals(101, this.product.getProductQuantity());
     }
+
+    @Test
+    void testEquals() {
+        Product testProduct = new Product();
+        testProduct.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        assertEquals(this.product, testProduct);
+    }
+
+    @Test
+    void testInvalidEquals() {
+        Product testProduct = new Product();
+        testProduct.setProductId("th1s-sh0uld-n0t-w0rk");
+        assertNotEquals(this.product, testProduct);
+    }
 }
