@@ -39,6 +39,14 @@ public class ProductRepositoryTest {
     }
 
     @Test
+    void testCreateEmptyId() {
+        productRepository.create(new Product());
+        Iterator<Product> productIterator = productRepository.findAll();
+        Product product = productIterator.next();
+        assertTrue(product.getProductId() != null && !product.getProductId().isEmpty());
+    }
+
+    @Test
     void testFindAllIfEmpty() {
         Iterator<Product> productIterator = productRepository.findAll();
         assertFalse(productIterator.hasNext());

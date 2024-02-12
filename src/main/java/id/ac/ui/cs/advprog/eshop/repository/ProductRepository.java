@@ -13,7 +13,7 @@ public class ProductRepository {
     private List<Product> productData = new ArrayList<>();
 
     public Product create(Product product) {
-        while (product.getProductId() == null || productData.contains(product)) {
+        while (product.getProductId() == null) {
             product.setProductId(UUID.randomUUID().toString());
         }
         productData.add(product);
