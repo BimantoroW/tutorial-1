@@ -57,5 +57,8 @@ public class ProductTest {
         Product testProduct = new Product();
         testProduct.setProductId("th1s-sh0uld-n0t-w0rk");
         assertNotEquals(this.product, testProduct);
+
+        String testString = "yip yip horray";
+        assertNotEquals(this.product, testString);
     }
 }
