@@ -17,4 +17,10 @@ public class Product {
             return this.productId.equals(p.productId);
         }
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        return prime + ((this.productId == null) ? 0 : this.productId.hashCode());
+    }
 }
