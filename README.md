@@ -28,3 +28,14 @@ sehingga itu dapat menjadi sebuah _vulnerability_ juga.
    kita dapat membuat satu fungsi seperti fungsi `setup()` yang akan pergi ke halaman _Create Product_ dan membuat beberapa
    produk baru. Setelah itu, baru kita dapat membuat fungsi-fungsi lain untuk mengecek kebenaran produk-produk yang dibuat
    oleh fungsi `setup()` tadi, seperti mengecek jumlah produk yang telah dibuat, mengecek namanya, dan sebagainya.
+
+# Tutorial 2
+### Refleksi
+1. Isu-isu yang saya perbaiki pada latihan ini adalah
+   - Menambahkan elemen `<caption>` ke dalam tabel HTML untuk memperbaiki isu tabel HTML yang tidak memiliki deskripsi
+   - Menggunakan bantuan https://app.stepsecurity.io yang direkomendasikan GitHub untuk memperbaiki isu-isu keamanan pada *file* `.yml`, seperti isu *token permissions*.
+   - Mengubah *field injection* menjadi *constructor injection* pada kelas *controller* dan *service*
+   - Menghilangkan *modifier* *public* pada semua kelas test \
+
+   Strategi yang saya gunakan untuk mengatasi masalah ini adalah melihat rekomendasi yang diberi GitHub dan SonarCloud. Kemudian, saya pahami mengapa hal itu direkomendasikan dan baru saya imlpementasikan pada kode saya.
+2. Menurut saya iya, implementasi saya sudah memenuhi definisi CI/CD. *Continuous integration* merujuk pada praktek pengembangan *software* di mana tiap perubahan yang dilakukan *developer* dites dan diintegrasikan ke dalam *codebase* secara **otomatis** oleh sebuah *build script*. *Continuous deployment* merujuk pada praktek pengembangan *software* yang men-*deploy* kode baru ke lingkungan *production* secara otomatis tiap kali ada perubahan. Pada *codebase* saya, kedua hal itu sudah terpenuhi. CI dipenuhi dengan GitHub Actions yang menjalankan *test* secara otomatis tiap kali kode baru di-*push*. Selain itu, SonarCloud juga akan melakukan *static code analysis* pade *codebase* untuk mendeteksi isu-isu, seperti *bug* dan *code smell*. CD dipenuhi *deployment* otomatis ke Koyeb setiap kali ada perubahan kode di *branch* *main*. *Deployment* otomatis ini sudah datang dari Koyeb-nya sendiri sehingga tidak perlu membuat GitHub Workflow baru.
