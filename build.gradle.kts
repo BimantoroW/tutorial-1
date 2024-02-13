@@ -77,15 +77,12 @@ tasks.test {
 }
 
 tasks.jacocoTestReport {
+	reports {
+		xml.required = true
+	}
 	dependsOn(tasks.test)
 }
 
 tasks.withType<Test>().configureEach {
 	useJUnitPlatform()
-}
-
-tasks.jacocoTestReport {
-	reports {
-		xml.required = true
-	}
 }
