@@ -28,41 +28,13 @@ repositories {
 	mavenCentral()
 }
 
-sourceSets {
-	create("integrationTest") {
-		compileClasspath += sourceSets.main.get().output
-		runtimeClasspath += sourceSets.main.get().output
-	}
-}
-
 sonar {
 	properties {
-		property("sonar.projectKey", "baeldung-gradle-kotlin-dsl")
-		property("sonar.projectName", "Example of Gradle Project with Kotlin DSL")
+		property("sonar.projectKey", "BimantoroW_tutorial-1")
+		property("sonar.organization", "bimantorow")
+		property("sonar.host.url", "https://sonarcloud.io")
 	}
 }
-
-val integrationTestImplementation: Configuration by configurations.getting {
-	extendsFrom(configurations.implementation.get())
-	extendsFrom(configurations.testImplementation.get())
-}
-
-val integrationTestRuntimeOnly: Configuration by configurations.getting {
-	extendsFrom(configurations.implementation.get())
-	extendsFrom(configurations.testRuntimeOnly.get())
-}
-
-val integrationTest = task<Test>("integrationTest") {
-	useJUnitPlatform()
-	description = "Task to run integration tests"
-	group = "verification"
-
-	testClassesDirs = sourceSets["integrationTest"].output.classesDirs
-	classpath = sourceSets["integrationTest"].runtimeClasspath
-	shouldRunAfter("test")
-}
-
-tasks.check { dependsOn(integrationTest) }
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
