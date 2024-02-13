@@ -83,3 +83,9 @@ tasks.jacocoTestReport {
 tasks.withType<Test>().configureEach {
 	useJUnitPlatform()
 }
+
+tasks.jacocoTestReport {
+	reports {
+		xml.required = true
+	}
+}
