@@ -11,6 +11,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.Mockito.*;
 import static org.hamcrest.Matchers.containsString;
@@ -77,4 +80,31 @@ public class ProductControllerTest {
         verify(service, times(1)).edit(any(Product.class), anyString(), anyInt());
     }
 
+    @Test
+    void testDeleteGet() throws Exception {
+        Product product = new Product();
+        product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+
+        when(service.findById(anyString())).thenReturn(product);
+
+        this.mockMvc.perform(get(String.format("/product/delete?id=%s", product.getProductId())))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(header().exists("Location"))
+                .andExpect(header().string("Location", equalTo("list")));
+
+        verify(service, times(1)).delete(any(Product.class));
+    }
+
+    @Test
+    void testProductListGet() throws Exception {
+        List<Product> products = new ArrayList<>();
+        products.add(new Product());
+        when(service.findAll()).thenReturn(products);
+        this.mockMvc.perform(get("/product/list"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("products"))
+                .andExpect(content().string(containsString("Edit")));
+    }
 }
