@@ -37,7 +37,7 @@ public class ProductControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Create New Product")))
                 .andExpect(model().attributeExists("product"))
-                .andExpect(view().name("createProduct"));
+                .andExpect(view().name("CreateProduct"));
     }
 
     @Test
