@@ -3,6 +3,7 @@ plugins {
 	jacoco
 	id("org.springframework.boot") version "3.2.2"
 	id("io.spring.dependency-management") version "1.1.4"
+	id("org.sonarqube") version "4.4.1.3373"
 }
 
 group = "id.ac.ui.cs.advprog"
@@ -26,6 +27,42 @@ configurations {
 repositories {
 	mavenCentral()
 }
+
+sourceSets {
+	create("integrationTest") {
+		compileClasspath += sourceSets.main.get().output
+		runtimeClasspath += sourceSets.main.get().output
+	}
+}
+
+sonar {
+	properties {
+		property("sonar.projectKey", "baeldung-gradle-kotlin-dsl")
+		property("sonar.projectName", "Example of Gradle Project with Kotlin DSL")
+	}
+}
+
+val integrationTestImplementation: Configuration by configurations.getting {
+	extendsFrom(configurations.implementation.get())
+	extendsFrom(configurations.testImplementation.get())
+}
+
+val integrationTestRuntimeOnly: Configuration by configurations.getting {
+	extendsFrom(configurations.implementation.get())
+	extendsFrom(configurations.testRuntimeOnly.get())
+}
+
+val integrationTest = task<Test>("integrationTest") {
+	useJUnitPlatform()
+	description = "Task to run integration tests"
+	group = "verification"
+
+	testClassesDirs = sourceSets["integrationTest"].output.classesDirs
+	classpath = sourceSets["integrationTest"].runtimeClasspath
+	shouldRunAfter("test")
+}
+
+tasks.check { dependsOn(integrationTest) }
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
