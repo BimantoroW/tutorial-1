@@ -61,4 +61,10 @@ public class ProductTest {
         String testString = "yip yip horray";
         assertNotEquals(this.product, testString);
     }
+
+    @Test
+    void testHashCode() {
+        int expectedHash = 31 + this.product.getProductId().hashCode();
+        assertEquals(expectedHash, this.product.hashCode());
+    }
 }
