@@ -15,8 +15,7 @@ public class CarRepository {
 
     public Car create(Car car) {
         if (car.getCarId() == null) {
-            UUID uuid = UUID.randomUUID();
-            car.setCarId(uuid.toString());
+            assignUUID(car);
         }
         carData.add(car);
         return car;
@@ -50,5 +49,10 @@ public class CarRepository {
 
     public void delete(String id) {
         carData.removeIf(car -> car.getCarId().equals(id));
+    }
+
+    private void assignUUID(Car car) {
+        UUID uuid = UUID.randomUUID();
+        car.setCarId(uuid.toString());
     }
 }
