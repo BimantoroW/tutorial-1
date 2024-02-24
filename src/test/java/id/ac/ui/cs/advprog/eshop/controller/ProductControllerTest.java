@@ -89,7 +89,8 @@ class ProductControllerTest {
 
         when(service.findById(anyString())).thenReturn(product);
 
-        this.mockMvc.perform(get(String.format("/product/delete?id=%s", product.getProductId())))
+        this.mockMvc.perform(post("/product/delete", product.getProductId())
+                        .param("id", product.getProductId()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(header().exists("Location"))
                 .andExpect(header().string("Location", equalTo("list")));
