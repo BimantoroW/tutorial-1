@@ -17,12 +17,8 @@ import java.util.List;
 public class ProductController {
     private static final String REDIRECT_LIST = "redirect:list";
 
-    private final ProductService service;
-
     @Autowired
-    public ProductController(ProductService service) {
-        this.service = service;
-    }
+    private ProductService service;
 
     @GetMapping("/create")
     public String createProductPage(Model model) {
@@ -68,13 +64,10 @@ public class ProductController {
 @Controller
 @RequestMapping("/car")
 class CarController extends ProductController {
-    private static final String REDIRECT_LIST = "redirect:carList";
-    private CarServiceImpl carService;
+    private static final String REDIRECT_LIST = "redirect:listCar";
 
     @Autowired
-    public CarController(ProductService service) {
-        super(service);
-    }
+    private CarServiceImpl carService;
 
     @GetMapping("/createCar")
     public String createCarPage(Model model) {
