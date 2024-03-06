@@ -40,34 +40,41 @@ public class PaymentTest {
     }
 
     @Test
+    void testNullOrder() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Payment payment = new Payment(this.dummyId, "VOUCHER_CODE", this.voucherDataInvalid, null);
+        });
+    }
+
+    @Test
     void testValidPaymentMethod() {
-        Payment payment = new Payment(this.dummyId, "VOUCHER_CODE", this.voucherDataValid);
+        Payment payment = new Payment(this.dummyId, "VOUCHER_CODE", this.voucherDataValid, order);
         assertEquals(PaymentMethod.VOUCHER_CODE.getValue(), payment.getMethod());
     }
 
     @Test
     void testInvalidPaymentMethod() {
         assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment(this.dummyId, "12hoursadayinfrontofascreendude", this.voucherDataValid);
+            Payment payment = new Payment(this.dummyId, "12hoursadayinfrontofascreendude", this.voucherDataValid, order);
         });
     }
 
     @Test
     void testEmptyPaymentData() {
         assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment(this.dummyId, "VOUCHER_CODE", new HashMap<>());
+            Payment payment = new Payment(this.dummyId, "VOUCHER_CODE", new HashMap<>(), order);
         });
     }
 
     @Test
     void testValidVoucherData() {
-        Payment payment = new Payment(this.dummyId, "VOUCHER_CODE", this.voucherDataValid);
+        Payment payment = new Payment(this.dummyId, "VOUCHER_CODE", this.voucherDataValid, order);
         assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
     }
 
     @Test
     void testInvalidVoucherData() {
-        Payment payment = new Payment(this.dummyId, "VOUCHER_CODE", this.voucherDataInvalid);
+        Payment payment = new Payment(this.dummyId, "VOUCHER_CODE", this.voucherDataInvalid, order);
         assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
     }
 }
