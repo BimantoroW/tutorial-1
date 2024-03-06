@@ -20,7 +20,7 @@ public class Payment {
             throw new IllegalArgumentException();
         }
         this.paymentData = paymentData;
-        if (this.isPaymentDataValid(paymentData)) {
+        if (this.isPaymentDataValid(method, paymentData)) {
             this.setStatus(PaymentStatus.SUCCESS.getValue());
         } else {
             this.setStatus(PaymentStatus.REJECTED.getValue());
@@ -43,9 +43,11 @@ public class Payment {
         }
     }
 
-    private boolean isPaymentDataValid(Map<String, String> paymentData) {
-        // Override this in every subclass please please please please please please please don't forget okay bye
-        return true;
+    private boolean isPaymentDataValid(String method, Map<String, String> paymentData) {
+        if (method.equals(PaymentMethod.VOUCHER_CODE.getValue())) {
+            return isVoucherCodeValid(paymentData);
+        }
+        return false;
     }
 
     private boolean isVoucherCodeValid(Map<String, String> data) {

@@ -34,7 +34,7 @@ public class PaymentTest {
         this.voucherDataValid.put("voucherCode", "ESHOP1234ABC5678");
 
         this.voucherDataInvalid = new HashMap<>();
-        this.voucherDataValid.put("voucherCode", "doireallywannabedoingthisfortherestofmylife");
+        this.voucherDataInvalid.put("voucherCode", "doireallywannabedoingthisfortherestofmylife");
 
         this.dummyId = "136522556-012a-4c07-b546-54eb1396d79b";
     }
@@ -57,5 +57,17 @@ public class PaymentTest {
         assertThrows(IllegalArgumentException.class, () -> {
             Payment payment = new Payment(this.dummyId, "VOUCHER_CODE", new HashMap<>());
         });
+    }
+
+    @Test
+    void testValidVoucherData() {
+        Payment payment = new Payment(this.dummyId, "VOUCHER_CODE", this.voucherDataValid);
+        assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
+    }
+
+    @Test
+    void testInvalidVoucherData() {
+        Payment payment = new Payment(this.dummyId, "VOUCHER_CODE", this.voucherDataInvalid);
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
     }
 }
