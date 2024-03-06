@@ -12,10 +12,12 @@ public class Payment {
     private String method;
     private String status;
     private Map<String, String> paymentData;
+    private Order order;
 
-    public Payment(String id, String method, Map<String, String> paymentData) {
+    public Payment(String id, String method, Map<String, String> paymentData, Order order) {
         this.id = id;
         setMethod(method);
+
         if (paymentData.isEmpty()) {
             throw new IllegalArgumentException();
         }
@@ -25,6 +27,11 @@ public class Payment {
         } else {
             this.setStatus(PaymentStatus.REJECTED.getValue());
         }
+
+        if (order == null) {
+            throw new IllegalArgumentException();
+        }
+        this.order = order;
     }
 
     private void setMethod(String method) {
@@ -38,6 +45,11 @@ public class Payment {
     public void setStatus(String status) {
         if (PaymentStatus.contains(status)) {
             this.status = status;
+            if (status.equals(PaymentStatus.SUCCESS.getValue())) {
+                this.order.setStatus("SUCCESS");
+            } else if (status.equals(PaymentStatus.REJECTED.getValue())) {
+                this.order.setStatus("FAILED");
+            }
         } else {
             throw new IllegalArgumentException();
         }
