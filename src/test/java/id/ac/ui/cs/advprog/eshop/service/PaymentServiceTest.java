@@ -69,11 +69,11 @@ class PaymentServiceTest {
     void testAddPayment() {
         Payment payment1 = payments.get(0);
         doReturn(payment1).when(paymentRepository).save(any(Payment.class));
-        payment1 = paymentService.addPayment(payment1.getOrder(), PaymentMethod.VOUCHER.getValue(), payment1.getPaymentData());
+        payment1 = paymentService.addPayment(payment1.getOrder(), PaymentMethod.VOUCHER_CODE.getValue(), payment1.getPaymentData());
 
         Payment payment2 = payments.get(1);
         doReturn(payment2).when(paymentRepository).save(any(Payment.class));
-        payment2 = paymentService.addPayment(payment2.getOrder(), PaymentMethod.BANK.getValue(), payment2.getPaymentData());
+        payment2 = paymentService.addPayment(payment2.getOrder(), PaymentMethod.BANK_TRANSFER.getValue(), payment2.getPaymentData());
 
         doReturn(payment1).when(paymentRepository).getPaymentById(payment1.getId());
         Payment findResult = paymentService.getPayment(payment1.getId());
@@ -119,7 +119,7 @@ class PaymentServiceTest {
     @Test
     void testGetAllPayment() {
         doReturn(payments).when(paymentRepository).getAllPayments();
-        List<Payment> resultPayments = paymentService.getAllPayment();
+        List<Payment> resultPayments = paymentService.getAllPayments();
 
         assertNotNull(resultPayments);
         assertEquals(payments.size(), resultPayments.size());

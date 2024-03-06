@@ -63,6 +63,8 @@ public class Payment {
     private boolean isPaymentDataValid(String method, Map<String, String> paymentData) {
         if (method.equals(PaymentMethod.VOUCHER_CODE.getValue())) {
             return isVoucherCodeValid(paymentData);
+        } else if (method.equals(PaymentMethod.BANK_TRANSFER.getValue())) {
+            return isBankTransferValid(paymentData);
         }
         return false;
     }
@@ -82,5 +84,14 @@ public class Payment {
             return false;
         }
         return true;
+    }
+
+    private boolean isBankTransferValid(Map<String , String> data) {
+        if (data.size() != 1) {
+            return false;
+        }
+        String bankName = data.get("bankName");
+        String referenceCode = data.get("referenceCode");
+        return bankName != null && !bankName.isEmpty() && referenceCode != null && !referenceCode.isEmpty();
     }
 }
