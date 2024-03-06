@@ -16,6 +16,8 @@ public class PaymentTest {
     private Order order;
     private Map<String, String> voucherDataValid;
     private Map<String, String> voucherDataInvalid;
+    private Map<String, String> bankDataValid;
+    private Map<String, String> bankDataInvalid;
     private String dummyId;
 
     @BeforeEach
@@ -35,6 +37,14 @@ public class PaymentTest {
 
         this.voucherDataInvalid = new HashMap<>();
         this.voucherDataInvalid.put("voucherCode", "doireallywannabedoingthisfortherestofmylife");
+
+        this.bankDataValid = new HashMap<>();
+        this.bankDataValid.put("bankName", "asd");
+        this.bankDataValid.put("referenceCode", "dfgh");
+
+        this.bankDataInvalid = new HashMap<>();
+        this.bankDataInvalid.put("bankName", "");
+        this.bankDataInvalid.put("referenceCode", "");
 
         this.dummyId = "136522556-012a-4c07-b546-54eb1396d79b";
     }
@@ -75,6 +85,18 @@ public class PaymentTest {
     @Test
     void testInvalidVoucherData() {
         Payment payment = new Payment(this.dummyId, "VOUCHER_CODE", this.voucherDataInvalid, order);
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
+    }
+
+    @Test
+    void testValidBankData() {
+        Payment payment = new Payment(this.dummyId, PaymentMethod.BANK_TRANSFER.getValue(), this.bankDataValid, order);
+        assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
+    }
+
+    @Test
+    void testInvalidBankData() {
+        Payment payment = new Payment(this.dummyId, PaymentMethod.BANK_TRANSFER.getValue(), this.bankDataInvalid, order);
         assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
     }
 }

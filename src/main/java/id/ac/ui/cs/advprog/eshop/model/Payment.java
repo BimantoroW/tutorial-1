@@ -33,10 +33,6 @@ public class Payment {
         } else {
             this.setStatus(PaymentStatus.REJECTED.getValue());
         }
-
-        if (order == null) {
-            throw new IllegalArgumentException();
-        }
     }
 
     private void setMethod(String method) {
@@ -87,11 +83,13 @@ public class Payment {
     }
 
     private boolean isBankTransferValid(Map<String , String> data) {
-        if (data.size() != 1) {
+        if (data.size() != 2) {
             return false;
         }
         String bankName = data.get("bankName");
         String referenceCode = data.get("referenceCode");
+        System.out.println(bankName);
+        System.out.println(referenceCode);
         return bankName != null && !bankName.isEmpty() && referenceCode != null && !referenceCode.isEmpty();
     }
 }
