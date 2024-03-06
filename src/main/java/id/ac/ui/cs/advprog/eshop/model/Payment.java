@@ -16,6 +16,12 @@ public class Payment {
 
     public Payment(String id, String method, Map<String, String> paymentData, Order order) {
         this.id = id;
+
+        if (order == null) {
+            throw new IllegalArgumentException();
+        }
+        this.order = order;
+
         setMethod(method);
 
         if (paymentData.isEmpty()) {
@@ -31,7 +37,6 @@ public class Payment {
         if (order == null) {
             throw new IllegalArgumentException();
         }
-        this.order = order;
     }
 
     private void setMethod(String method) {

@@ -41,7 +41,7 @@ public class PaymentRepositoryTest {
         Payment payment = payments.get(0);
         paymentRepository.save(payment);
 
-        Payment savedPayment = paymentRepository.findById(payments.get(1).getId());
+        Payment savedPayment = paymentRepository.getPaymentById(payment.getId());
         assertEquals(payment.getId(), savedPayment.getId());
         assertEquals(payment.getMethod(), savedPayment.getMethod());
         assertSame(payment.getPaymentData(), savedPayment.getPaymentData());
@@ -53,19 +53,19 @@ public class PaymentRepositoryTest {
         Payment payment1 = payments.get(0);
         paymentRepository.save(payment1);
         Payment payment2 = new Payment(payment1.getId(), payment1.getMethod(), payment1.getPaymentData(), payment1.getOrder());
-        assertThrows(IllegalStateException.class, ()-> paymentRepository.save(payment2));
+        assertThrows(IllegalArgumentException.class, ()-> paymentRepository.save(payment2));
     }
 
     @Test
     void testFindByIdIfIdFound(){
         Payment payment = paymentRepository.save(payments.get(0));
-        Payment saved = paymentRepository.findById(payment.getId());
+        Payment saved = paymentRepository.getPaymentById(payment.getId());
         assertEquals(payment.getId(), saved.getId());
     }
 
     @Test
     void testFindByIdIfIdNotFound(){
-        assertNull(paymentRepository.findById("bvbsadhbqwdnhbfsfdbdnh"));
+        assertNull(paymentRepository.getPaymentById("bvbsadhbqwdnhbfsfdbdnh"));
     }
 
     @Test
