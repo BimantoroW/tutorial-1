@@ -56,3 +56,10 @@ sehingga itu dapat menjadi sebuah _vulnerability_ juga.
    Dengan menerapkan SOLID, codebase kita akan lebih terstruktur, maintainable, bersih, dan readable. Sebagai contoh, bayangkan situasi di mana sebuah bug baru saja ditemukan pada codebase. Jika kita tidak menerapkan single responsibility principle, kita kemungkinan besar akan menghabiskan banyak waktu hanya untuk mencari bug tersebut berasal dari kelas mana karena kelas-kelas kita terikat kuat sata sama lain. Namun, apabila kita menerapkan SRP, kita akan lebih cepat menemukan tempat asal dari bug-nya karena kita telah menstruktur kelas-kelas kita sedemikian hingga tiap kelas hanya memiliki satu tanggung jawab.
 3. Kerugian jika tidak menerapkan SOLID \
    Apabila kita tidak menerapkan SOLID, codebase kita akan lebih susah untuk di-maintain. Salah satu contohnya seperti di atas. Untuk contoh lain, apbila kita tidak menerapkan interface segregation principle, orang-orang yang ingin menggunakan interface kita akan terbebani karena sekarang ia harus membuat implementasi metode-metode yang sebenarnya tidak ia perlukan.
+
+# Tutorial 4
+### Refleksi
+1. Kegunaan TDD \
+   Menurut saya, TDD itu berguna karena akan membantu _developer_ menjamin bahwa kodenya selalu benar tiap kali membuat kode baru. Namun, saya mengalami kesulitan saat ingin mengimplementasi tes sebelum kelas aslinya. Untuk saya pribadi, saya lebih menyukai untuk membuat kerangka kelasnya terlebih dahulu baru membuat tesnya. Dengan seperti itu, saya tahu apa saja metode yang perlu saya tes dan saya juga akan mengetahui apakah kelasnya sudah memenuhi _requirement_ metode yang dispesifikasikan.
+2. F.I.R.S.T Principles \
+   Menurut saya, tes-tes yang saya buat sudah cukup memenuhi prinsip F.I.R.S.T. Namun, saya sedikit ragu pada prinsip _isolated_. Pada tes-tes saya, banyak variabel yang bergantung pada kelas di luar kelas yang saya ingin tes. Walaupun saya sudah memakai _mocking_, saya merasa bahwa tes-tes ini berikatan erat dengan kelas-kelas di luar dirinya.
