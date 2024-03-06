@@ -43,8 +43,25 @@ public class Payment {
         }
     }
 
-    protected boolean isPaymentDataValid(Map<String, String> paymentData) {
+    private boolean isPaymentDataValid(Map<String, String> paymentData) {
         // Override this in every subclass please please please please please please please don't forget okay bye
+        return true;
+    }
+
+    private boolean isVoucherCodeValid(Map<String, String> data) {
+        if (data.size() != 1) {
+            return false;
+        }
+        String code = data.get("voucherCode");
+        if (code == null) {
+            return false;
+        }
+        boolean isCorrectLength = code.length() == 16;
+        boolean startsWithEshop = code.startsWith("ESHOP");
+        boolean digitIsCorrectLength = code.chars().filter(Character::isDigit).count() == 8;
+        if (!isCorrectLength || !startsWithEshop || !digitIsCorrectLength) {
+            return false;
+        }
         return true;
     }
 }
