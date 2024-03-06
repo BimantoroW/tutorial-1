@@ -3,18 +3,19 @@ package id.ac.ui.cs.advprog.eshop.enums;
 import lombok.Getter;
 
 @Getter
-public enum PaymentMethod {
-    VOUCHER_CODE("VOUCHER_CODE");
+public enum PaymentStatus {
+    SUCCESS("SUCCESS"),
+    REJECTED("REJECTED");
 
     private final String value;
 
-    PaymentMethod(String value) {
+    PaymentStatus(String value) {
         this.value = value;
     }
 
     public static boolean contains(String param) {
-        for (PaymentMethod paymentMethod : PaymentMethod.values()) {
-            if (paymentMethod.name().equals(param)) {
+        for (PaymentStatus paymentStatus : PaymentStatus.values()) {
+            if (paymentStatus.name().equals(param)) {
                 return true;
             }
         }
